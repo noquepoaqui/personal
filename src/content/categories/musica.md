@@ -2,6 +2,9 @@
 type: category
 id: musica
 title: Música
+backgroundColor: f6f7f8
+color: 000
+linkColor: c08497
 ---
 
 Desde 2002 he participado en varios proyectos musicales. Han sido años
