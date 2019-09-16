@@ -1,35 +1,54 @@
-import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
+import StyledLink from './atoms/StyledLink'
+import MainHeader from './atoms/MainHeader'
+import UnorderedList from './atoms/UnorderedList'
+import ListItem from './atoms/ListItem'
+import ImportantListItem from './atoms/ImportantListItem'
+import HeaderNav from "./molecules/HeaderNav"
+import { useStaticQuery, graphql } from "gatsby"
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </header>
-)
+
+const Header = ({ siteTitle }) => {
+  const data = useStaticQuery(graphql`
+    query {
+      allMarkdownRemark(filter: {frontmatter: {type: {eq: "category"}}}) {
+        edges {
+          node {
+            fields {
+              slug
+            }
+            frontmatter {
+              title
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  return (
+    <MainHeader>
+      <HeaderNav>
+        <UnorderedList>
+          <ImportantListItem>
+            <StyledLink to="/">
+              {siteTitle}
+            </StyledLink>
+          </ImportantListItem>
+          {data.allMarkdownRemark.edges.map(item => (
+            <ListItem key={item.node.fields.slug}>
+              <StyledLink to={item.node.fields.slug}>
+                {item.node.frontmatter.title}
+              </StyledLink>
+            </ListItem>
+          ))}
+          <ListItem><a href="#bio">Bio</a></ListItem>
+        </UnorderedList>
+      </HeaderNav>
+    </MainHeader>
+  )
+}
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
