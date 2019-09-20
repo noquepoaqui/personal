@@ -38,6 +38,7 @@ exports.createPages = async ({ graphql, actions }) => {
   `)
 
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+
     const component = node.frontmatter && node.frontmatter.type === 'category'
       ? path.resolve(`./src/templates/category.js`)
       : path.resolve(`./src/templates/post.js`)
