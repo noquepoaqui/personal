@@ -7,7 +7,7 @@ import GlobalStyles from "./GlobalStyles"
 import Main from "./atoms/Main"
 import Bio from "./Bio"
 
-const Layout = ({ children, useHeader, backgroundColor, color, linkColor }) => {
+const Layout = ({ children, backgroundColor, color, linkColor }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {

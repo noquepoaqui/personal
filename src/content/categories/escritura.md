@@ -2,8 +2,8 @@
 type: category
 id: escritura
 title: Escritura
-backgroundColor: f6f7f8
-color: 000
+backgroundColor: 000
+color: f6f7f8
 linkColor: c08497
 ---
 
